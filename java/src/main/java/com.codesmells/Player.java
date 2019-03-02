@@ -19,4 +19,8 @@ enum Player {
                 return NONE;
         }
     }
+
+    char toSymbol() {
+        return this.symbol;
+    }
 }
