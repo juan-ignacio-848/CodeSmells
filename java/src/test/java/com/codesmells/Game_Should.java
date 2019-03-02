@@ -129,4 +129,5 @@ public class Game_Should {
 
         assertEquals('O', winner);
     }
+
 }
