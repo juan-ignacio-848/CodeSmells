@@ -1,14 +1,24 @@
 package com.codesmells;
 
-public class Game {
+class Game {
     private char lastPlayer = ' ';
     private Board board = new Board();
 
-    public void Play(char nextUp, int x, int y) throws Exception {
+    void Play(char nextUp, int x, int y) throws Exception {
         isMovementValid(nextUp, x, y);
 
         lastPlayer = nextUp;
         board.addTileAt(nextUp, x, y);
+    }
+
+    char Winner() {
+        if (board.winningCombinationInRow(0)) return board.playerAt(0, 0);
+
+        if (board.winningCombinationInRow(1)) return board.playerAt(1, 0);
+
+        if (board.winningCombinationInRow(2)) return board.playerAt(2, 0);
+
+        return ' ';
     }
 
     private void isMovementValid(char nextUp, int x, int y) throws Exception {
@@ -37,16 +47,6 @@ public class Game {
         if (board.playerAt(x, y) != ' ') {
             throw new Exception("Invalid position");
         }
-    }
-
-    public char Winner() {
-        if (board.winningCombinationInRow(0)) return board.playerAt(0, 0);
-
-        if (board.winningCombinationInRow(1)) return board.playerAt(1, 0);
-
-        if (board.winningCombinationInRow(2)) return board.playerAt(2, 0);
-
-        return ' ';
     }
 
 }
