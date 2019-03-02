@@ -8,7 +8,7 @@ class Game {
     private Board board = new Board();
 
     void Play(char nextUp, int x, int y) throws Exception {
-        isMovementValid(Player.from(nextUp), x, y);
+        isMovementValid(Player.from(nextUp), new Tile(x, y));
 
         lastPlayer = Player.from(nextUp);
         board.take(new Tile(x, y), lastPlayer);
@@ -27,12 +27,12 @@ class Game {
         return NONE.toSymbol();
     }
 
-    private void isMovementValid(Player nextUp, int x, int y) throws Exception {
+    private void isMovementValid(Player nextUp, Tile tile) throws Exception {
         firstPlayerIsX(nextUp);
 
         cannotPlayTwiceInARow(nextUp);
 
-        cannotPlayInPlayedPosition(x, y);
+        cannotPlayInPlayedPosition(tile);
     }
 
     private void firstPlayerIsX(Player nextUp) throws Exception {
@@ -49,8 +49,8 @@ class Game {
         }
     }
 
-    private void cannotPlayInPlayedPosition(int x, int y) throws Exception {
-        if (board.playerAt(new Tile(x, y)) != NONE.toSymbol()) {
+    private void cannotPlayInPlayedPosition(Tile tile) throws Exception {
+        if (board.playerAt(tile) != NONE.toSymbol()) {
             throw new Exception("Invalid position");
         }
     }
