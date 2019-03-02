@@ -6,6 +6,14 @@ public class Game {
 
     public void Play(char symbol, int x, int y) throws Exception {
         //if first move
+        isMovementValid(symbol, x, y);
+
+        // update game state
+        _lastSymbol = symbol;
+        _board.AddTileAt(symbol, x, y);
+    }
+
+    private void isMovementValid(char symbol, int x, int y) throws Exception {
         if (_lastSymbol == ' ') {
             //if player is X
             if (symbol == 'O') {
@@ -20,10 +28,6 @@ public class Game {
         else if (_board.TileAt(x, y).Symbol != ' ') {
             throw new Exception("Invalid position");
         }
-
-        // update game state
-        _lastSymbol = symbol;
-        _board.AddTileAt(symbol, x, y);
     }
 
     public char Winner() {
