@@ -11,7 +11,7 @@ class Game {
         isMovementValid(nextUp, x, y);
 
         lastPlayer = Player.from(nextUp);
-        board.take(new Tile(x, y), nextUp);
+        board.take(new Tile(x, y), lastPlayer);
     }
 
     char Winner() {

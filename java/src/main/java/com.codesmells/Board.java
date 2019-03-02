@@ -3,13 +3,13 @@ package com.codesmells;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.codesmells.Player.*;
+import static com.codesmells.Player.X;
 
 class Board {
     private Map<Tile, Player> playedTiles = new HashMap<>();
 
-    void take(Tile tile, char symbol) {
-        playedTiles.put(tile, from(symbol));
+    void take(Tile tile, Player player) {
+        playedTiles.put(tile, player);
     }
 
     char playerAt(Tile tile) {
