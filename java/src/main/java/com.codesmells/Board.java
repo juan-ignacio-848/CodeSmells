@@ -39,7 +39,4 @@ class Board {
         }
     }
 
-    private enum Player {
-        X, O, NONE
-    }
 }
