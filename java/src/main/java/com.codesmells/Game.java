@@ -5,10 +5,8 @@ public class Game {
     private Board _board = new Board();
 
     public void Play(char symbol, int x, int y) throws Exception {
-        //if first move
         isMovementValid(symbol, x, y);
 
-        // update game state
         _lastSymbol = symbol;
         _board.AddTileAt(symbol, x, y);
     }
@@ -71,5 +69,6 @@ public class Game {
 
         return ' ';
     }
+
 }
 
