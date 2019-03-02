@@ -8,7 +8,7 @@ public class Game {
         isMovementValid(nextUp, x, y);
 
         lastPlayer = nextUp;
-        board.AddTileAt(nextUp, x, y);
+        board.addTileAt(nextUp, x, y);
     }
 
     private void isMovementValid(char nextUp, int x, int y) throws Exception {
@@ -40,27 +40,13 @@ public class Game {
     }
 
     public char Winner() {
-        if (checkRow(0)) return board.playerAt(0, 0);
+        if (board.winningCombinationInRow(0)) return board.playerAt(0, 0);
 
-        if (checkRow(1)) return board.playerAt(1, 0);
+        if (board.winningCombinationInRow(1)) return board.playerAt(1, 0);
 
-        if (checkRow(2)) return board.playerAt(2, 0);
+        if (board.winningCombinationInRow(2)) return board.playerAt(2, 0);
 
         return ' ';
-    }
-
-    private boolean checkRow(int i) {
-        if (board.playerAt(i, 0) != ' ' &&
-                board.playerAt(i, 1) != ' ' &&
-                board.playerAt(i, 2) != ' ') {
-            //if first row is full with same symbol
-            if (board.playerAt(i, 0) ==
-                    board.playerAt(i, 1) &&
-                    board.playerAt(i, 2) == board.playerAt(i, 1)) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

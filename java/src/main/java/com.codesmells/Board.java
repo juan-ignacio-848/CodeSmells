@@ -1,43 +1,45 @@
 package com.codesmells;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Board {
-    private List<Tile> _plays = new ArrayList<>();
+class Board {
+    private Map<Tile, Player> playedTiles = new HashMap<>();
 
-    public Board() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                Tile tile = new Tile();
-                tile.X = i;
-                tile.Y = j;
-                tile.Symbol = ' ';
-                _plays.add(tile);
-            }
-        }
-    }
-
-    public Tile TileAt(int x, int y) {
-        for (Tile t : _plays) {
-            if (t.X == x && t.Y == y) {
-                return t;
-            }
-        }
-        return null;
-    }
-
-    public void AddTileAt(char symbol, int x, int y) {
-        Tile newTile = new Tile();
-        newTile.X = x;
-        newTile.Y = y;
-        newTile.Symbol = symbol;
-
-        TileAt(x, y).Symbol = symbol;
+    void addTileAt(char symbol, int x, int y) {
+        playedTiles.put(new Tile(x, y), playerBy(symbol));
     }
 
     char playerAt(int x, int y) {
-        Tile tile = TileAt(x, y);
-        return tile.Symbol;
+        Player player = playedTiles.get(new Tile(x, y));
+        return player == null ? ' ' : player == Player.X ? 'X' : 'O';
+    }
+
+    boolean winningCombinationInRow(int i) {
+        if (playerAt(i, 0) != ' ' &&
+                playerAt(i, 1) != ' ' &&
+                playerAt(i, 2) != ' ') {
+            if (playerAt(i, 0) ==
+                    playerAt(i, 1) &&
+                    playerAt(i, 2) == playerAt(i, 1)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Player playerBy(char symbol) {
+        switch (symbol) {
+            case 'X':
+                return Player.X;
+            case 'O':
+                return Player.O;
+            default:
+                return Player.NONE;
+        }
+    }
+
+    private enum Player {
+        X, O, NONE
     }
 }
