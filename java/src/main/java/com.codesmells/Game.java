@@ -24,7 +24,7 @@ class Game {
         if (board.winningCombinationInRow(2))
             return board.playerAt(new Tile(2, 0));
 
-        return ' ';
+        return NONE.toSymbol();
     }
 
     private void isMovementValid(Player nextUp, int x, int y) throws Exception {
@@ -50,7 +50,7 @@ class Game {
     }
 
     private void cannotPlayInPlayedPosition(int x, int y) throws Exception {
-        if (board.playerAt(new Tile(x, y)) != ' ') {
+        if (board.playerAt(new Tile(x, y)) != NONE.toSymbol()) {
             throw new Exception("Invalid position");
         }
     }
