@@ -6,8 +6,8 @@ import java.util.Map;
 class Board {
     private Map<Tile, Player> playedTiles = new HashMap<>();
 
-    void addTileAt(char symbol, int x, int y) {
-        playedTiles.put(new Tile(x, y), playerBy(symbol));
+    void take(Tile tile, char symbol) {
+        playedTiles.put(tile, playerBy(symbol));
     }
 
     char playerAt(int x, int y) {

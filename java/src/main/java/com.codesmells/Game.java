@@ -8,7 +8,7 @@ class Game {
         isMovementValid(nextUp, x, y);
 
         lastPlayer = nextUp;
-        board.addTileAt(nextUp, x, y);
+        board.take(new Tile(x, y), nextUp);
     }
 
     char Winner() {

@@ -24,4 +24,12 @@ class Tile {
     public int hashCode() {
         return Objects.hash(x, y);
     }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
+    }
 }
