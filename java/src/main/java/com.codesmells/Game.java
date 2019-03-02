@@ -10,7 +10,7 @@ class Game {
     void Play(char nextUp, int x, int y) throws Exception {
         isMovementValid(nextUp, x, y);
 
-        lastPlayer = Player.playerBy(nextUp);
+        lastPlayer = Player.from(nextUp);
         board.take(new Tile(x, y), nextUp);
     }
 
@@ -30,7 +30,7 @@ class Game {
     private void isMovementValid(char nextUp, int x, int y) throws Exception {
         firstPlayerIsX(nextUp);
 
-        cannotPlayTwiceInARow(playerBy(nextUp));
+        cannotPlayTwiceInARow(from(nextUp));
 
         cannotPlayInPlayedPosition(x, y);
     }

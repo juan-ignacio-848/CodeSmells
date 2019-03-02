@@ -1,9 +1,15 @@
 package com.codesmells;
 
 enum Player {
-    X, O, NONE;
+    X('X'), O('O'), NONE(' ');
 
-    static Player playerBy(char symbol) {
+    private char symbol;
+
+    Player(char symbol) {
+        this.symbol = symbol;
+    }
+
+    static Player from(char symbol) {
         switch (symbol) {
             case 'X':
                 return X;

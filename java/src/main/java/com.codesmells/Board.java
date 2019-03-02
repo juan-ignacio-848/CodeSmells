@@ -9,7 +9,7 @@ class Board {
     private Map<Tile, Player> playedTiles = new HashMap<>();
 
     void take(Tile tile, char symbol) {
-        playedTiles.put(tile, playerBy(symbol));
+        playedTiles.put(tile, from(symbol));
     }
 
     char playerAt(Tile tile) {
