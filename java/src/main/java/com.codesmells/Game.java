@@ -13,29 +13,21 @@ public class Game {
 
     private void isMovementValid(char symbol, int x, int y) throws Exception {
         if (_lastSymbol == ' ') {
-            //if player is X
             if (symbol == 'O') {
                 throw new Exception("Invalid first player");
             }
-        }
-        //if not first move but player repeated
-        else if (symbol == _lastSymbol) {
+        } else if (symbol == _lastSymbol) {
             throw new Exception("Invalid next player");
-        }
-        //if not first move but play on an already played tile
-        else if (_board.TileAt(x, y).Symbol != ' ') {
+        } else if (_board.TileAt(x, y).Symbol != ' ') {
             throw new Exception("Invalid position");
         }
     }
 
     public char Winner() {
-        //if the positions in first row are taken
         if (checkRow(0)) return _board.TileAt(0, 0).Symbol;
 
-        //if the positions in first row are taken
         if (checkRow(1)) return _board.TileAt(1, 0).Symbol;
 
-        //if the positions in first row are taken
         if (checkRow(2)) return _board.TileAt(2, 0).Symbol;
 
         return ' ';
