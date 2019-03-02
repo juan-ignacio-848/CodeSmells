@@ -1,14 +1,14 @@
 package com.codesmells;
 
 public class Game {
-    private char _lastSymbol = ' ';
-    private Board _board = new Board();
+    private char lastPlayer = ' ';
+    private Board board = new Board();
 
     public void Play(char nextUp, int x, int y) throws Exception {
         isMovementValid(nextUp, x, y);
 
-        _lastSymbol = nextUp;
-        _board.AddTileAt(nextUp, x, y);
+        lastPlayer = nextUp;
+        board.AddTileAt(nextUp, x, y);
     }
 
     private void isMovementValid(char nextUp, int x, int y) throws Exception {
@@ -20,7 +20,7 @@ public class Game {
     }
 
     private void firstPlayerIsX(char nextUp) throws Exception {
-        if (_lastSymbol == ' ') {
+        if (lastPlayer == ' ') {
             if (nextUp == 'O') {
                 throw new Exception("Invalid first player");
             }
@@ -28,7 +28,7 @@ public class Game {
     }
 
     private void cannotPlayTwiceInARow(char symbol) throws Exception {
-        if (symbol == _lastSymbol) {
+        if (symbol == lastPlayer) {
             throw new Exception("Invalid next player");
         }
     }
@@ -40,7 +40,7 @@ public class Game {
     }
 
     private char playerAt(int x, int y) {
-        return _board.TileAt(x, y).Symbol;
+        return board.TileAt(x, y).Symbol;
     }
 
     public char Winner() {
