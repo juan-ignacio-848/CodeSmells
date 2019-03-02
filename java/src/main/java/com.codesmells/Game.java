@@ -8,7 +8,7 @@ class Game {
     private Board board = new Board();
 
     void Play(char nextUp, int x, int y) throws Exception {
-        isMovementValid(nextUp, x, y);
+        isMovementValid(Player.from(nextUp), x, y);
 
         lastPlayer = Player.from(nextUp);
         board.take(new Tile(x, y), lastPlayer);
@@ -27,17 +27,17 @@ class Game {
         return ' ';
     }
 
-    private void isMovementValid(char nextUp, int x, int y) throws Exception {
+    private void isMovementValid(Player nextUp, int x, int y) throws Exception {
         firstPlayerIsX(nextUp);
 
-        cannotPlayTwiceInARow(from(nextUp));
+        cannotPlayTwiceInARow(nextUp);
 
         cannotPlayInPlayedPosition(x, y);
     }
 
-    private void firstPlayerIsX(char nextUp) throws Exception {
+    private void firstPlayerIsX(Player nextUp) throws Exception {
         if (lastPlayer == NONE) {
-            if (nextUp == 'O') {
+            if (nextUp == O) {
                 throw new Exception("Invalid first player");
             }
         }
