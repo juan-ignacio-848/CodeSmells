@@ -1,22 +1,28 @@
 package com.codesmells;
 
+import static com.codesmells.Player.*;
+
 class Game {
-    private char lastPlayer = ' ';
+
+    private Player lastPlayer = NONE;
     private Board board = new Board();
 
     void Play(char nextUp, int x, int y) throws Exception {
         isMovementValid(nextUp, x, y);
 
-        lastPlayer = nextUp;
+        lastPlayer = Player.playerBy(nextUp);
         board.take(new Tile(x, y), nextUp);
     }
 
     char Winner() {
-        if (board.winningCombinationInRow(0)) return board.playerAt(new Tile(0, 0));
+        if (board.winningCombinationInRow(0))
+            return board.playerAt(new Tile(0, 0));
 
-        if (board.winningCombinationInRow(1)) return board.playerAt(new Tile(1, 0));
+        if (board.winningCombinationInRow(1))
+            return board.playerAt(new Tile(1, 0));
 
-        if (board.winningCombinationInRow(2)) return board.playerAt(new Tile(2, 0));
+        if (board.winningCombinationInRow(2))
+            return board.playerAt(new Tile(2, 0));
 
         return ' ';
     }
@@ -24,20 +30,20 @@ class Game {
     private void isMovementValid(char nextUp, int x, int y) throws Exception {
         firstPlayerIsX(nextUp);
 
-        cannotPlayTwiceInARow(nextUp);
+        cannotPlayTwiceInARow(playerBy(nextUp));
 
         cannotPlayInPlayedPosition(x, y);
     }
 
     private void firstPlayerIsX(char nextUp) throws Exception {
-        if (lastPlayer == ' ') {
+        if (lastPlayer == NONE) {
             if (nextUp == 'O') {
                 throw new Exception("Invalid first player");
             }
         }
     }
 
-    private void cannotPlayTwiceInARow(char symbol) throws Exception {
+    private void cannotPlayTwiceInARow(Player symbol) throws Exception {
         if (symbol == lastPlayer) {
             throw new Exception("Invalid next player");
         }
