@@ -10,18 +10,18 @@ class Board {
         playedTiles.put(tile, playerBy(symbol));
     }
 
-    char playerAt(int x, int y) {
-        Player player = playedTiles.get(new Tile(x, y));
+    char playerAt(Tile tile) {
+        Player player = playedTiles.get(tile);
         return player == null ? ' ' : player == Player.X ? 'X' : 'O';
     }
 
     boolean winningCombinationInRow(int i) {
-        if (playerAt(i, 0) != ' ' &&
-                playerAt(i, 1) != ' ' &&
-                playerAt(i, 2) != ' ') {
-            if (playerAt(i, 0) ==
-                    playerAt(i, 1) &&
-                    playerAt(i, 2) == playerAt(i, 1)) {
+        if (playerAt(new Tile(i, 0)) != ' ' &&
+                playerAt(new Tile(i, 1)) != ' ' &&
+                playerAt(new Tile(i, 2)) != ' ') {
+            if (playerAt(new Tile(i, 0)) ==
+                    playerAt(new Tile(i, 1)) &&
+                    playerAt(new Tile(i, 2)) == playerAt(new Tile(i, 1))) {
                 return true;
             }
         }

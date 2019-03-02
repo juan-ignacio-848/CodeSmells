@@ -12,11 +12,11 @@ class Game {
     }
 
     char Winner() {
-        if (board.winningCombinationInRow(0)) return board.playerAt(0, 0);
+        if (board.winningCombinationInRow(0)) return board.playerAt(new Tile(0, 0));
 
-        if (board.winningCombinationInRow(1)) return board.playerAt(1, 0);
+        if (board.winningCombinationInRow(1)) return board.playerAt(new Tile(1, 0));
 
-        if (board.winningCombinationInRow(2)) return board.playerAt(2, 0);
+        if (board.winningCombinationInRow(2)) return board.playerAt(new Tile(2, 0));
 
         return ' ';
     }
@@ -44,7 +44,7 @@ class Game {
     }
 
     private void cannotPlayInPlayedPosition(int x, int y) throws Exception {
-        if (board.playerAt(x, y) != ' ') {
+        if (board.playerAt(new Tile(x, y)) != ' ') {
             throw new Exception("Invalid position");
         }
     }
