@@ -4,21 +4,37 @@ public class Game {
     private char _lastSymbol = ' ';
     private Board _board = new Board();
 
-    public void Play(char symbol, int x, int y) throws Exception {
-        isMovementValid(symbol, x, y);
+    public void Play(char nextUp, int x, int y) throws Exception {
+        isMovementValid(nextUp, x, y);
 
-        _lastSymbol = symbol;
-        _board.AddTileAt(symbol, x, y);
+        _lastSymbol = nextUp;
+        _board.AddTileAt(nextUp, x, y);
     }
 
-    private void isMovementValid(char symbol, int x, int y) throws Exception {
+    private void isMovementValid(char nextUp, int x, int y) throws Exception {
+        firstPlayerIsX(nextUp);
+
+        cannotPlayTwiceInARow(nextUp);
+
+        cannotPlayInPlayedPosition(x, y);
+    }
+
+    private void firstPlayerIsX(char nextUp) throws Exception {
         if (_lastSymbol == ' ') {
-            if (symbol == 'O') {
+            if (nextUp == 'O') {
                 throw new Exception("Invalid first player");
             }
-        } else if (symbol == _lastSymbol) {
+        }
+    }
+
+    private void cannotPlayTwiceInARow(char symbol) throws Exception {
+        if (symbol == _lastSymbol) {
             throw new Exception("Invalid next player");
-        } else if (_board.TileAt(x, y).Symbol != ' ') {
+        }
+    }
+
+    private void cannotPlayInPlayedPosition(int x, int y) throws Exception {
+        if (_board.TileAt(x, y).Symbol != ' ') {
             throw new Exception("Invalid position");
         }
     }
