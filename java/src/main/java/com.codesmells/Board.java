@@ -35,4 +35,9 @@ public class Board {
 
         TileAt(x, y).Symbol = symbol;
     }
+
+    char playerAt(int x, int y) {
+        Tile tile = TileAt(x, y);
+        return tile.Symbol;
+    }
 }

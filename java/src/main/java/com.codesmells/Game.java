@@ -34,33 +34,29 @@ public class Game {
     }
 
     private void cannotPlayInPlayedPosition(int x, int y) throws Exception {
-        if (playerAt(x, y) != ' ') {
+        if (board.playerAt(x, y) != ' ') {
             throw new Exception("Invalid position");
         }
     }
 
-    private char playerAt(int x, int y) {
-        return board.TileAt(x, y).Symbol;
-    }
-
     public char Winner() {
-        if (checkRow(0)) return playerAt(0, 0);
+        if (checkRow(0)) return board.playerAt(0, 0);
 
-        if (checkRow(1)) return playerAt(1, 0);
+        if (checkRow(1)) return board.playerAt(1, 0);
 
-        if (checkRow(2)) return playerAt(2, 0);
+        if (checkRow(2)) return board.playerAt(2, 0);
 
         return ' ';
     }
 
     private boolean checkRow(int i) {
-        if (playerAt(i, 0) != ' ' &&
-                playerAt(i, 1) != ' ' &&
-                playerAt(i, 2) != ' ') {
+        if (board.playerAt(i, 0) != ' ' &&
+                board.playerAt(i, 1) != ' ' &&
+                board.playerAt(i, 2) != ' ') {
             //if first row is full with same symbol
-            if (playerAt(i, 0) ==
-                    playerAt(i, 1) &&
-                    playerAt(i, 2) == playerAt(i, 1)) {
+            if (board.playerAt(i, 0) ==
+                    board.playerAt(i, 1) &&
+                    board.playerAt(i, 2) == board.playerAt(i, 1)) {
                 return true;
             }
         }
