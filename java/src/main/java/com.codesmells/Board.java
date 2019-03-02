@@ -3,6 +3,8 @@ package com.codesmells;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.codesmells.Player.*;
+
 class Board {
     private Map<Tile, Player> playedTiles = new HashMap<>();
 
@@ -12,7 +14,7 @@ class Board {
 
     char playerAt(Tile tile) {
         Player player = playedTiles.get(tile);
-        return player == null ? ' ' : player == Player.X ? 'X' : 'O';
+        return player == null ? ' ' : player == X ? 'X' : 'O';
     }
 
     boolean winningCombinationInRow(int i) {
@@ -26,17 +28,6 @@ class Board {
             }
         }
         return false;
-    }
-
-    private Player playerBy(char symbol) {
-        switch (symbol) {
-            case 'X':
-                return Player.X;
-            case 'O':
-                return Player.O;
-            default:
-                return Player.NONE;
-        }
     }
 
 }
